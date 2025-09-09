@@ -23,7 +23,6 @@
 
 <form action="postjobprocess.php" method="POST">
 
-  <!-- Position ID -->
   <label for="Position">Position ID:</label>
   <input type="text" id="Position" name="positionid" 
         pattern="^ID[0-9]{3}$" 
@@ -46,19 +45,19 @@
 
   <fieldset>
     <legend>Position Type:</legend>
-    <label><input type="radio" name="position" value="Full-time" required /> Full-time</label>
-    <label><input type="radio" name="position" value="Part-time" required /> Part-time</label>
+    <label><input type="radio" name="position" value="Full Time" required /> Full-Time</label>
+    <label><input type="radio" name="position" value="Part Time" required /> Part-Time</label>
   </fieldset>
 
   <fieldset>
-    <legend>Contract Type:</legend>
-    <label><input type="radio" name="contract" value="ongoing" required /> On-going</label>
-    <label><input type="radio" name="contract" value="fixedterm" required /> Fixed term</label>
+  <legend>Contract Type:</legend>
+    <label><input type="radio" name="contract" value="Ongoing" required /> On-going</label>
+    <label><input type="radio" name="contract" value="Fixed Term" required /> Fixed term</label>
   </fieldset>
 
   <fieldset>
     <legend>Location:</legend>
-    <label><input type="radio" name="location" value="On site" required /> On site</label>
+    <label><input type="radio" name="location" value="On site" required /> On-site</label>
     <label><input type="radio" name="location" value="Remote" required /> Remote</label>
   </fieldset>
 
