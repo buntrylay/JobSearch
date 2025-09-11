@@ -1,0 +1,178 @@
+/* Base styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: azure;
+    overflow-x: hidden;   /* Prevent horizontal scrolling */
+}
+
+header {
+    background-color: lightblue;
+    color: black;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+}
+
+h1, h2, h3 {
+    margin: 10px 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+}
+
+p {
+    margin: 10px 0;
+    font-family: 'Arial', sans-serif;
+    font-size: 15px;
+}
+
+/* Navigation bar styles */
+.pages {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 15px;
+    background-color: lightblue;
+    flex-wrap: wrap;
+}
+
+.pages a {
+    flex: 1;
+    text-decoration: none;
+    text-align: center;
+    color: #333;
+    padding: 10px 0;
+    min-width: 100px;
+}
+
+.pages a:hover {
+    transform: scale(1.1);
+    font-weight: bold;
+}
+
+/* Form styles */
+form {
+    background-color: white;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;     /* Fix desktop width */
+    width: 95%;           /* Keep responsive */
+    box-sizing: border-box;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+fieldset {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+}
+
+legend {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Input fields */
+input[type="text"], 
+input[type="date"], 
+textarea, 
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+/* Radio & Checkbox inline */
+input[type="radio"], 
+input[type="checkbox"] {
+    margin-right: 6px;
+    transform: scale(1.1);
+}
+
+fieldset label {
+    font-weight: normal;
+    display: inline-block;
+    margin-right: 15px;
+    margin-bottom: 5px;
+}
+
+/* Buttons */
+input[type="submit"], 
+button {
+    padding: 12px 15px;
+    background-color: lightblue;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    transition: all 0.3s;
+    width: 100%;
+    margin-top: 10px;
+}
+
+input[type="submit"]:hover, 
+button:hover {
+    background-color: deepskyblue;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Search results grid */
+.results {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.job-card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+    background: #fff;
+    border-left: 5px solid #0077cc;
+}
+
+.job-card p {
+    margin: 6px 0;
+    font-size: 14px;
+}
+
+.job-card strong {
+    color: #0077cc;
+}
+
+/* Responsive design */
+@media (min-width: 801px) {
+    .results {
+        grid-template-columns: 1fr 1fr;  /* 2 per row */
+    }
+}
+
+@media (max-width: 600px) {
+    .pages {
+        flex-direction: column;
+        align-items: center;
+    }
+    .pages a {
+        margin-bottom: 10px;
+    }
+    input[type="submit"], button {
+        width: 100%;
+    }
+}

@@ -6,9 +6,11 @@
     <meta name="keywords" content="PHP" />
     <meta name="author" content="Buntry" />
     <title>Job Posting Save</title>
+    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<h1>Job Posting Submission</h1>
+<header><h1>Job Posting Submission</h1></header>
 <?php
 if (
     isset($_POST["positionid"]) &&
@@ -64,13 +66,14 @@ if (
     
     // --- Create directory if not exists ---
     umask(0007);
-    $dir = "../../../data/jobs";  
+    $dir = "../../data/jobs";  
     if (!file_exists($dir)) {
         mkdir($dir, 02770);
     }
 
     $filename = $dir . "/positions.txt";
     $handle = fopen($filename, "a");
+    
 
     // Corrected the record string, $accept is now a single value
     $record = $positionid . "\t" .
@@ -82,21 +85,49 @@ if (
               $location . "\t" .
               $accept;
 
-    if ($handle) {
-        if (fwrite($handle, $record . PHP_EOL)) {
-            echo "<p>✅ Thank you for posting your job application!</p>";
-            echo "<p><a href='index.php'>Go to Home Page</a></p>";
-        } else {
-            echo "<p>❌ Cannot save your job application.</p>";
+    $existingEntries = [];
+    if (file_exists($filename)) {
+        $existingEntries = file($filename, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    }
+
+    $isDuplicate = false;
+    foreach ($existingEntries as $entry) {
+        $parts = explode("\t", $entry);
+        if (count($parts) === 8 && $parts[0] === $positionid) {
+            $isDuplicate = true;
+            break;
         }
-        fclose($handle);
+    }
+
+    if ($isDuplicate) {
+        echo "<p>You have already posted a job with this ID!</p>";
+        echo "<div class='pages'>";
+        echo "<p><a href='postjobform.php'>Post a Job</a></p>";
+        echo "<p><a href='index.php'>Go to Home Page</a></p>";
+        echo "</div>";
     } else {
-        echo "<p>❌ Unable to open job application file.</p>";
+        if ($handle) {
+            if (fwrite($handle, $record . PHP_EOL)) {
+                echo "<p>Thank you for posting your job application!</p>";
+                echo "<div class='pages'><a href='index.php'>Go to Home Page</a></div>";
+            } else {
+                echo "<p>Cannot save your job application.</p>";
+            }
+            fclose($handle);
+        } else {
+            echo "<p>Unable to open job application file.</p>";
+            echo "<div class='pages'>";
+            echo "<p><a href='postjobform.php'>Post a Job</a></p>";
+            echo "<p><a href='index.php'>Go to Home Page</a></p>";
+            echo "</div>";
+        }
     }
 } else {
-    echo "<p style='color:red'>❌ Invalid access. Please submit the form.</p>";
+    echo "<p>Invalid access. Please submit the form.</p>";
+    echo "<div class='pages'>";
     echo "<p><a href='postjobform.php'>Post a Job</a></p>";
     echo "<p><a href='index.php'>Go to Home Page</a></p>";
+    echo "</div>";
 }
 ?>
 </body>
